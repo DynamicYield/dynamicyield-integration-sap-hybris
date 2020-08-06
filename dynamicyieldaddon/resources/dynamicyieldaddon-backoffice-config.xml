@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<config xmlns="http://www.hybris.com/cockpit/config"
+		xmlns:na="http://www.hybris.com/cockpitng/config/notifications"
+		xmlns:list-view="http://www.hybris.com/cockpitng/component/listView"
+		xmlns:y="http://www.hybris.com/cockpit/config/hybris"
+		xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch"
+		xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea"
+		xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree"
+		xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch">
+
+	<context merge-by="module" parent="auto" component="explorer-tree">
+		<explorer-tree:explorer-tree>
+			<explorer-tree:navigation-node id="hmc_treenode_system">
+				<explorer-tree:navigation-node id="hmc.dynamicyieldintegrationgroup">
+					<explorer-tree:type-node code="DynamicYieldIntegration" id="hmc.type.tree.dynamicyieldintegration"/>
+					<explorer-tree:type-node code="DynamicYieldExportProductFeedCronJob"
+											 id="hmc.dynamic.yield.product.feed.cronjob"/>
+					<explorer-tree:type-node code="DynamicYieldExportProperty"
+											 id="hmc.dynamic.yield.product.feed.properties"/>
+				</explorer-tree:navigation-node>
+			</explorer-tree:navigation-node>
+		</explorer-tree:explorer-tree>
+	</context>
+
+	<context component="listview" type="DynamicYieldIntegration">
+		<list-view:list-view>
+			<list-view:column qualifier="siteID"/>
+			<list-view:column qualifier="accessKeyID"/>
+		</list-view:list-view>
+	</context>
+
+	<context merge-by="type" type="DynamicYieldIntegration" component="simple-search">
+		<simple-search:simple-search>
+			<simple-search:field name="siteID"/>
+		</simple-search:simple-search>
+	</context>
+
+	<context merge-by="type" type="DynamicYieldIntegration" component="advanced-search">
+		<advanced-search:advanced-search>
+			<advanced-search:field-list>
+				<advanced-search:field name="siteID" selected="true"/>
+				<advanced-search:field name="accessKeyID" selected="true"/>
+				<advanced-search:field name="secretAccessKey" selected="true"/>
+				<advanced-search:field name="syncRate" selected="true"/>
+				<advanced-search:field name="cdnLocation" selected="true"/>
+				<advanced-search:field name="productFeedUploadLocation" selected="true"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+
+	<context type="DynamicYieldIntegration" component="base" merge-by="type">
+		<y:base>
+			<y:labels>
+				<y:label>'Dynamic Yield Site ID: ' + siteID</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+
+	<context component="editor-area" merge-by="type" type="DynamicYieldIntegration">
+		<editorArea:editorArea name="Dynamic Yield Configuration editor area">
+			<editorArea:tab name="hmc.tab.dynamic.yield" position="0">
+				<editorArea:section name="hmc.tab.dynamic.yield.settings">
+					<editorArea:attribute qualifier="siteID"
+										  description="hmc.tab.dynamic.yield.integration.siteid.hint"/>
+					<editorArea:attribute qualifier="accessKeyID"
+										  description="hmc.tab.dynamic.yield.integration.accesskeyid.hint"/>
+					<editorArea:attribute qualifier="secretAccessKey"
+										  description="hmc.tab.dynamic.yield.integration.secretaccesskey.hint"/>
+				</editorArea:section>
+				<editorArea:section name="hmc.tab.dynamic.yield.productcatalogsync">
+					<editorArea:attribute qualifier="syncRate"/>
+				</editorArea:section>
+				<editorArea:section name="hmc.tab.dynamic.yield.advancedsettings">
+					<editorArea:panel name="dynamicyieldintegration_backoffice_cnd_panel" colspan="2" rowspan="2">
+						<editorArea:attribute qualifier="cdnLocation"/>
+						<editorArea:attribute qualifier="cdnLocationCustomURL"/>
+					</editorArea:panel>
+					<editorArea:panel name="dynamicyieldintegration_backoffice_productfeed_panel" colspan="2" rowspan="2">
+						<editorArea:attribute qualifier="productFeedUploadLocation"/>
+						<editorArea:attribute qualifier="productFeedUploadLocationCustomURL"/>
+					</editorArea:panel>
+					<editorArea:attribute qualifier="useEuropeanScripts"/>
+				</editorArea:section>
+				<editorArea:section name="hmc.tab.dynamic.yield.admin">
+					<editorArea:attribute qualifier="pk"/>
+					<editorArea:attribute qualifier="creationtime"/>
+					<editorArea:attribute qualifier="modifiedtime"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+
+	<context type="DynamicYieldIntegration" component="editorAreaDynamicForms" merge-by="module">
+		<df:dynamicForms xmlns:df="http://www.hybris.com/cockpitng/component/dynamicForms">
+			<df:attribute id="cdnLocationCustomURLId" triggeredOn="cdnLocation" qualifier="cdnLocationCustomURL"
+						  visibleIf="cdnLocation.code == 'CUSTOM'"/>
+			<df:attribute id="productFeedUploadLocationId" triggeredOn="productFeedUploadLocation"
+						  qualifier="productFeedUploadLocationCustomURL"
+						  visibleIf="productFeedUploadLocation.code == 'CUSTOM'"/>
+		</df:dynamicForms>
+	</context>
+
+	<context component="listview" type="DynamicYieldExportProductFeedCronJob">
+		<list-view:list-view>
+			<list-view:column qualifier="productCatalog"/>
+			<list-view:column qualifier="baseStore"/>
+			<list-view:column qualifier="baseSite"/>
+			<list-view:column qualifier="exportProperties"/>
+		</list-view:list-view>
+	</context>
+
+	<context component="listview" type="DynamicYieldExportProperty">
+		<list-view:list-view>
+			<list-view:column qualifier="productProperty"/>
+			<list-view:column qualifier="dynamicYieldProperty"/>
+			<list-view:column qualifier="active"/>
+			<list-view:column qualifier="multilanguage"/>
+			<list-view:column qualifier="mandatory"/>
+			<list-view:column qualifier="beanValueProvider"/>
+			<list-view:column qualifier="exportCronJob"/>
+		</list-view:list-view>
+	</context>
+
+	<context merge-by="type" type="DynamicYieldExportProductFeedCronJob" component="advanced-search">
+		<advanced-search:advanced-search>
+			<advanced-search:field-list>
+				<advanced-search:field name="productCatalog" selected="true"/>
+				<advanced-search:field name="baseStore" selected="true"/>
+				<advanced-search:field name="baseSite" selected="true"/>
+				<advanced-search:field name="exportProperties" selected="true"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+
+	<context merge-by="type" type="DynamicYieldExportProperty" component="advanced-search">
+		<advanced-search:advanced-search>
+			<advanced-search:field-list>
+				<advanced-search:field name="productProperty" selected="true"/>
+				<advanced-search:field name="dynamicYieldProperty" selected="true"/>
+				<advanced-search:field name="active" selected="false"/>
+				<advanced-search:field name="multilanguage" selected="false"/>
+				<advanced-search:field name="mandatory" selected="false"/>
+				<advanced-search:field name="beanValueProvider" selected="false"/>
+				<advanced-search:field name="exportCronJob" selected="true"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+
+	<context type="DynamicYieldExportProperty" component="base" merge-by="type">
+		<y:base>
+			<y:labels>
+				<y:label>productProperty + '->' + dynamicYieldProperty</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+
+	<context type="DynamicYieldExportProductFeedCronJob" parent="CronJob" component="base" merge-by="replace">
+		<y:base>
+			<y:labels>
+				<y:label>@labelService.getObjectLabel(productCatalog)</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+
+	<context component="editor-area" merge-by="type" parent="CronJob" type="DynamicYieldExportProductFeedCronJob">
+		<editorArea:editorArea name="">
+			<editorArea:tab name="hmc.tab.dynamic.yield" position="0">
+				<editorArea:section name="hmc.tab.dynamic.yield.general">
+					<editorArea:attribute qualifier="productCatalog"/>
+					<editorArea:attribute qualifier="baseStore"/>
+					<editorArea:attribute qualifier="baseSite"/>
+					<editorArea:attribute qualifier="exportProperties"/>
+					<editorArea:attribute qualifier="logText"/>
+					<editorArea:attribute qualifier="triggers"/>
+				</editorArea:section>
+				<editorArea:section name="hmc.tab.dynamic.yield.admin">
+					<editorArea:attribute qualifier="pk"/>
+					<editorArea:attribute qualifier="creationtime"/>
+					<editorArea:attribute qualifier="modifiedtime"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+
+	<context component="editor-area" merge-by="type" type="DynamicYieldExportProperty">
+		<editorArea:editorArea name="">
+			<editorArea:tab name="hmc.tab.dynamic.yield" position="0">
+				<editorArea:section name="hmc.tab.dynamic.yield.general">
+					<editorArea:attribute qualifier="productProperty"/>
+					<editorArea:attribute qualifier="dynamicYieldProperty"/>
+					<editorArea:attribute qualifier="active"/>
+					<editorArea:attribute qualifier="multilanguage"/>
+					<editorArea:attribute qualifier="mandatory"/>
+					<editorArea:attribute qualifier="beanValueProvider"/>
+					<editorArea:attribute qualifier="exportCronJob"/>
+				</editorArea:section>
+				<editorArea:section name="hmc.tab.dynamic.yield.admin">
+					<editorArea:attribute qualifier="pk"/>
+					<editorArea:attribute qualifier="creationtime"/>
+					<editorArea:attribute qualifier="modifiedtime"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+
+</config>

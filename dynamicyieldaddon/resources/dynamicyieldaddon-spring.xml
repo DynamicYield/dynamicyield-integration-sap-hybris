@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+
+    <bean id="dynamicyieldaddonCoreDataImportedEventListener" parent="abstractCoreDataImportedEventListener">
+        <property name="supportedChannels">
+            <list value-type="de.hybris.platform.commerceservices.enums.SiteChannel">
+                <value>B2C</value>
+                <!--
+                                <value>B2B</value>
+                -->
+            </list>
+        </property>
+        <property name="addonExtensionMetadata">
+            <bean class="de.hybris.platform.addonsupport.data.AddonExtensionMetadata">
+                <property name="suffixChannel" value="false"/>
+                <property name="baseExtensionName" value="dynamicyieldaddon"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="dynamicyieldaddonSampleDataEventListener" parent="abstractGenericAddOnSampleDataEventListener">
+        <property name="extensionName" value="dynamicyieldaddon"/>
+    </bean>
+
+    <bean id="dynamicyieldexportproductfeed" parent="abstractJobPerformable"
+          class="com.dynamic.yield.cronjobs.DynamicYieldExportProductFeed"/>
+
+    <bean id="dynamicYieldExportInStockValueProvider"
+          class="com.dynamic.yield.valueprovider.impl.DynamicYieldExportInStockValueProvider"/>
+
+    <bean id="dynamicYieldExportUrlValueProvider"
+          class="com.dynamic.yield.valueprovider.impl.DynamicYieldExportUrlValueProvider"/>
+
+    <bean id="dynamicYieldExportGroupIdValueProvider"
+          class="com.dynamic.yield.valueprovider.impl.DynamicYieldExportGroupIdValueProvider"/>
+
+    <bean id="dynamicYieldExportPriceValueProvider"
+          class="com.dynamic.yield.valueprovider.impl.DynamicYieldExportPriceValueProvider"/>
+
+    <bean id="dynamicYieldExportCategoriesValueProvider"
+          class="com.dynamic.yield.valueprovider.impl.DynamicYieldExportCategoriesValueProvider"/>
+
+    <bean id="dynamicYieldExportImageUrlValueProvider"
+          class="com.dynamic.yield.valueprovider.impl.DynamicYieldExportImageUrlValueProvider"/>
+
+    <bean id="dynamicYieldExportKeywordsValueProvider"
+          class="com.dynamic.yield.valueprovider.impl.DynamicYieldExportKeywordsValueProvider"/>
+
+    <alias alias="dynamicYieldIntegrationService" name="defaultDynamicYieldIntegrationService"/>
+    <bean id="defaultDynamicYieldIntegrationService"
+          class="com.dynamic.yield.service.impl.DefaultDynamicYieldIntegrationService"/>
+
+    <alias name="dynamicYieldIntegrationPopulator" alias="dynamicYieldIntegrationPopulator"/>
+    <bean id="dynamicYieldIntegrationPopulator" class="com.dynamic.yield.populators.DynamicYieldIntegrationPopulator"/>
+
+    <alias name="defaultDynamicYieldIntegrationConverter" alias="dynamicYieldIntegrationConverter"/>
+    <bean id="defaultDynamicYieldIntegrationConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="com.dynamic.yield.data.DynamicYieldIntegrationData"/>
+        <property name="populators">
+            <list>
+                <ref bean="dynamicYieldIntegrationPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultDynamicYieldIntegrationFacade" alias="dynamicYieldIntegrationFacade"/>
+    <bean id="defaultDynamicYieldIntegrationFacade"
+          class="com.dynamic.yield.facade.impl.DefaultDynamicYieldIntegrationFacade"/>
+
+    <alias alias="dynamicYieldIntegrationDao" name="defaultDynamicYieldIntegrationDao"/>
+    <bean id="defaultDynamicYieldIntegrationDao" class="com.dynamic.yield.dao.impl.DefaultDynamicYieldIntegrationDao"/>
+
+    <bean id="dynamicYieldIntegrationPrepareInterceptor"
+          class="com.dynamic.yield.interceptors.DynamicYieldIntegrationPrepareInterceptor"/>
+
+    <bean id="dynamicYieldIntegrationPrepareMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="dynamicYieldIntegrationPrepareInterceptor"/>
+        <property name="typeCode" value="DynamicYieldIntegration"/>
+    </bean>
+
+    <alias alias="dynamicYieldExportProductFeedDao" name="defaultDynamicYieldExportProductFeedDao"/>
+    <bean id="defaultDynamicYieldExportProductFeedDao" class="com.dynamic.yield.dao.impl.DefaultDynamicYieldExportProductFeedDao"/>
+
+</beans>

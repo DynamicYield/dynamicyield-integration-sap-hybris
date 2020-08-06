@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="items.xsd">
+
+    <collectiontypes>
+        <collectiontype code="ProductAttributeCollection" elementtype="java.lang.String"  type="set"/>
+    </collectiontypes>
+
+    <enumtypes>
+        <enumtype code="CDNLocationOptions" dynamic="false">
+            <value code="STANDARD" />
+            <value code="CUSTOM" />
+        </enumtype>
+        <enumtype code="ProductFeedUploadLocationOptions" dynamic="false">
+            <value code="STANDARD" />
+            <value code="CUSTOM" />
+        </enumtype>
+        <enumtype code="SyncRateOptions" dynamic="false">
+            <value code="SIX_HOURS" />
+            <value code="TWELVE_HOURS" />
+            <value code="ONE_DAY" />
+        </enumtype>
+    </enumtypes>
+
+    <relations>
+        <relation code="DynamicYieldCronjob2PropertiesRelation" autocreate="true" generate="true" localized="false" >
+            <sourceElement type="DynamicYieldExportProductFeedCronJob" qualifier="exportCronJob" cardinality="one"  ordered="false">
+                <modifiers read="true" write="true" search="true" optional="false" removable="true" initial="true"/>
+            </sourceElement>
+            <targetElement type="DynamicYieldExportProperty" qualifier="exportProperties" cardinality="many" ordered="false" collectiontype="set" >
+                <modifiers read="true" write="true" search="true" optional="true" removable="true" initial="true"/>
+            </targetElement>
+        </relation>
+    </relations>
+
+    <itemtypes>
+        <typegroup name="Dynamic Yield Integration">
+            <itemtype code="DynamicYieldIntegration" autocreate="true" generate="true">
+                <deployment table="DynamicYieldIntegration" typecode="29999"/>
+                <attributes>
+                    <attribute qualifier="siteID" type="java.lang.Long">
+                        <description>Dynamic Yield section ID.</description>
+                        <modifiers read="true" write="true" optional="true" unique="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="accessKeyID" type="java.lang.String">
+                        <description>AWS S3 Access Key.</description>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="secretAccessKey" type="java.lang.String">
+                        <description>AWS S3 Secret Key.</description>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="syncRate" type="SyncRateOptions">
+                        <description>Number of hours between syncs of product feed.</description>
+                        <persistence type="property"/>
+                        <defaultvalue>em().getEnumerationValue("CDNLocationOptions", "ONE_DAY")</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="cdnLocation" type="CDNLocationOptions">
+                        <description>CDN location option.</description>
+                        <persistence type="property"/>
+                        <defaultvalue>em().getEnumerationValue("CDNLocationOptions", "STANDARD")</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="cdnLocationCustomURL" type="java.lang.String">
+                        <description>CDN location custom URL.</description>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="productFeedUploadLocation" type="ProductFeedUploadLocationOptions">
+                        <description>Product feed upload location option.</description>
+                        <persistence type="property"/>
+                        <defaultvalue>em().getEnumerationValue("ProductFeedUploadLocationOptions", "STANDARD")</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="productFeedUploadLocationCustomURL" type="java.lang.String">
+                        <description>Product feed upload location custom URL.</description>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="useEuropeanScripts" type="boolean">
+                        <persistence type="property" />
+                        <modifiers optional="false" />
+                        <defaultvalue>Boolean.FALSE</defaultvalue>
+                    </attribute>
+                </attributes>
+                <indexes>
+                    <index name="dynamicYieldIntegrationSiteIDUniqueIdx" unique="true">
+                        <key attribute="siteID" />
+                    </index>
+                </indexes>
+            </itemtype>
+
+            <itemtype code="DynamicYieldExportProductFeedCronJob" autocreate="true"
+                      generate="true" extends="CronJob"
+                      jaloclass="com.dynamic.yield.jalo.cronjobs.DynamicYieldExportProductFeedCronJob">
+                <attributes>
+                    <attribute type="CatalogVersion" qualifier="productCatalog">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute type="BaseStore" qualifier="baseStore">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute type="BaseSite" qualifier="baseSite">
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="DynamicYieldExportProperty" autocreate="true"
+                      generate="true" extends="GenericItem"
+                      jaloclass="com.dynamic.yield.jalo.cronjobs.DynamicYieldExportProperty">
+                <deployment table="DYExportProperty" typecode="11000" />
+                <attributes>
+                    <attribute type="java.lang.String" qualifier="productProperty">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute type="java.lang.String" qualifier="dynamicYieldProperty">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute type="boolean" qualifier="active">
+                        <persistence type="property"/>
+                        <defaultvalue>true</defaultvalue>
+                    </attribute>
+                    <attribute type="java.lang.String" qualifier="beanValueProvider">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute type="boolean" qualifier="multilanguage">
+                        <persistence type="property"/>
+                        <defaultvalue>false</defaultvalue>
+                    </attribute>
+                    <attribute type="boolean" qualifier="mandatory">
+                        <persistence type="property"/>
+                        <defaultvalue>true</defaultvalue>
+                    </attribute>
+                </attributes>
+                <indexes>
+                    <index name="dynamicYieldPropertyProductUniqueIdx" unique="true">
+                        <key attribute="productProperty" />
+                        <key attribute="dynamicYieldProperty" />
+                    </index>
+                    <index name="dynamicYieldPropertyUniqueIdx" unique="true">
+                        <key attribute="dynamicYieldProperty" />
+                    </index>
+                </indexes>
+            </itemtype>
+
+        </typegroup>
+
+    </itemtypes>
+</items>

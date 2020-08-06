@@ -1,0 +1,17 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+# you can put key/value pairs here.
+# Use Config.getParameter(..) to retrieve the values during runtime.
+
+dynamicyieldaddon.key=value
+
+# Specifies the location of the spring context file added automatically to the global platform application context.
+dynamicyieldaddon.application-context=dynamicyieldaddon-spring.xml
+
+yacceleratorstorefront.additionalWebSpringConfigs.dynamicyieldaddon=classpath:/dynamicyieldaddon/web/spring/dynamicyieldaddon-web-spring.xml
+
+
+
+dynamicyieldaddon.javascript.paths.responsive=/responsive/common/js/dynamicyieldaddon.js
+dynamicyieldaddon.css.paths.responsive=/responsive/common/css/dynamicyieldaddon.css
