@@ -10,6 +10,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.dynamic.yield.enums.ProductFeedUploadLocationOptions;
 import com.dynamic.yield.model.DynamicYieldIntegrationModel;
 import com.dynamic.yield.model.cronjobs.DynamicYieldExportProductFeedCronJobModel;
 import com.dynamic.yield.model.cronjobs.DynamicYieldExportPropertyModel;
@@ -136,7 +137,7 @@ public class DynamicYieldExportProductFeed extends AbstractJobPerformable<Dynami
         if (dynamicYieldIntegrationModel != null) {
             AWSCredentials credentials = new BasicAWSCredentials(dynamicYieldIntegrationModel.getAccessKeyID(),
                     dynamicYieldIntegrationModel.getSecretAccessKey());
-            boolean useEuropeanScripts = dynamicYieldIntegrationModel.isUseEuropeanScripts();
+            boolean useEuropeanScripts = ProductFeedUploadLocationOptions.EUROPE.equals(dynamicYieldIntegrationModel.getProductFeedUploadLocation());
             try {
                 AmazonS3 s3client =
                         AmazonS3ClientBuilder.standard().withCredentials

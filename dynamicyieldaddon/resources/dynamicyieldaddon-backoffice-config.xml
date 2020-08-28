@@ -80,9 +80,7 @@
 					</editorArea:panel>
 					<editorArea:panel name="dynamicyieldintegration_backoffice_productfeed_panel" colspan="2" rowspan="2">
 						<editorArea:attribute qualifier="productFeedUploadLocation"/>
-						<editorArea:attribute qualifier="productFeedUploadLocationCustomURL"/>
 					</editorArea:panel>
-					<editorArea:attribute qualifier="useEuropeanScripts"/>
 				</editorArea:section>
 				<editorArea:section name="hmc.tab.dynamic.yield.admin">
 					<editorArea:attribute qualifier="pk"/>
@@ -97,9 +95,6 @@
 		<df:dynamicForms xmlns:df="http://www.hybris.com/cockpitng/component/dynamicForms">
 			<df:attribute id="cdnLocationCustomURLId" triggeredOn="cdnLocation" qualifier="cdnLocationCustomURL"
 						  visibleIf="cdnLocation.code == 'CUSTOM'"/>
-			<df:attribute id="productFeedUploadLocationId" triggeredOn="productFeedUploadLocation"
-						  qualifier="productFeedUploadLocationCustomURL"
-						  visibleIf="productFeedUploadLocation.code == 'CUSTOM'"/>
 		</df:dynamicForms>
 	</context>
 

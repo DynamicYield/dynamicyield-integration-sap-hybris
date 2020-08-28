@@ -3,7 +3,7 @@
 <%@ taglib prefix="dynamicYieldIntegration" tagdir="/WEB-INF/tags/addons/dynamicyieldaddon/responsive" %>
 
 <c:set var="dynamicYieldIntegration" value="${dynamicYieldIntegrationData}" />
-<c:set var="useEuropeanScripts" value="${dynamicYieldIntegration.useEuropeanScripts}" />
+<c:set var="useEuropeanScripts" value="${dynamicYieldIntegration.cdnLocation eq 'EUROPE'}" />
 <c:set var="euSuffix" value="${useEuropeanScripts ? '-eu' : ''}" />
 <c:set var="standardURL" value="${useEuropeanScripts ? 'cdn-eu.dynamicyield.com' : 'cdn.dynamicyield.com'}" />
 <c:set var="dynamicYieldURL" value="${dynamicYieldIntegration.cdnLocation eq 'CUSTOM' ? dynamicYieldIntegration.cdnLocationCustomURL : standardURL}" />

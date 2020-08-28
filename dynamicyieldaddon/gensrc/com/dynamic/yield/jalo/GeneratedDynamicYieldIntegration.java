@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 3 Aug 2020, 09:33:05                        ---
+ * --- Generated at 28 Aug 2020, 11:43:38                       ---
  * ----------------------------------------------------------------
  */
 package com.dynamic.yield.jalo;
@@ -37,8 +37,6 @@ public abstract class GeneratedDynamicYieldIntegration extends GenericItem
 	public static final String PRODUCTFEEDUPLOADLOCATION = "productFeedUploadLocation";
 	/** Qualifier of the <code>DynamicYieldIntegration.productFeedUploadLocationCustomURL</code> attribute **/
 	public static final String PRODUCTFEEDUPLOADLOCATIONCUSTOMURL = "productFeedUploadLocationCustomURL";
-	/** Qualifier of the <code>DynamicYieldIntegration.useEuropeanScripts</code> attribute **/
-	public static final String USEEUROPEANSCRIPTS = "useEuropeanScripts";
 	protected static final Map<String, AttributeMode> DEFAULT_INITIAL_ATTRIBUTES;
 	static
 	{
@@ -51,7 +49,6 @@ public abstract class GeneratedDynamicYieldIntegration extends GenericItem
 		tmp.put(CDNLOCATIONCUSTOMURL, AttributeMode.INITIAL);
 		tmp.put(PRODUCTFEEDUPLOADLOCATION, AttributeMode.INITIAL);
 		tmp.put(PRODUCTFEEDUPLOADLOCATIONCUSTOMURL, AttributeMode.INITIAL);
-		tmp.put(USEEUROPEANSCRIPTS, AttributeMode.INITIAL);
 		DEFAULT_INITIAL_ATTRIBUTES = Collections.unmodifiableMap(tmp);
 	}
 	@Override
@@ -383,79 +380,6 @@ public abstract class GeneratedDynamicYieldIntegration extends GenericItem
 	public void setSyncRate(final EnumerationValue value)
 	{
 		setSyncRate( getSession().getSessionContext(), value );
-	}
-	
-	/**
-	 * <i>Generated method</i> - Getter of the <code>DynamicYieldIntegration.useEuropeanScripts</code> attribute.
-	 * @return the useEuropeanScripts
-	 */
-	public Boolean isUseEuropeanScripts(final SessionContext ctx)
-	{
-		return (Boolean)getProperty( ctx, USEEUROPEANSCRIPTS);
-	}
-	
-	/**
-	 * <i>Generated method</i> - Getter of the <code>DynamicYieldIntegration.useEuropeanScripts</code> attribute.
-	 * @return the useEuropeanScripts
-	 */
-	public Boolean isUseEuropeanScripts()
-	{
-		return isUseEuropeanScripts( getSession().getSessionContext() );
-	}
-	
-	/**
-	 * <i>Generated method</i> - Getter of the <code>DynamicYieldIntegration.useEuropeanScripts</code> attribute. 
-	 * @return the useEuropeanScripts
-	 */
-	public boolean isUseEuropeanScriptsAsPrimitive(final SessionContext ctx)
-	{
-		Boolean value = isUseEuropeanScripts( ctx );
-		return value != null ? value.booleanValue() : false;
-	}
-	
-	/**
-	 * <i>Generated method</i> - Getter of the <code>DynamicYieldIntegration.useEuropeanScripts</code> attribute. 
-	 * @return the useEuropeanScripts
-	 */
-	public boolean isUseEuropeanScriptsAsPrimitive()
-	{
-		return isUseEuropeanScriptsAsPrimitive( getSession().getSessionContext() );
-	}
-	
-	/**
-	 * <i>Generated method</i> - Setter of the <code>DynamicYieldIntegration.useEuropeanScripts</code> attribute. 
-	 * @param value the useEuropeanScripts
-	 */
-	public void setUseEuropeanScripts(final SessionContext ctx, final Boolean value)
-	{
-		setProperty(ctx, USEEUROPEANSCRIPTS,value);
-	}
-	
-	/**
-	 * <i>Generated method</i> - Setter of the <code>DynamicYieldIntegration.useEuropeanScripts</code> attribute. 
-	 * @param value the useEuropeanScripts
-	 */
-	public void setUseEuropeanScripts(final Boolean value)
-	{
-		setUseEuropeanScripts( getSession().getSessionContext(), value );
-	}
-	
-	/**
-	 * <i>Generated method</i> - Setter of the <code>DynamicYieldIntegration.useEuropeanScripts</code> attribute. 
-	 * @param value the useEuropeanScripts
-	 */
-	public void setUseEuropeanScripts(final SessionContext ctx, final boolean value)
-	{
-		setUseEuropeanScripts( ctx,Boolean.valueOf( value ) );
-	}
-	
-	/**
-	 * <i>Generated method</i> - Setter of the <code>DynamicYieldIntegration.useEuropeanScripts</code> attribute. 
-	 * @param value the useEuropeanScripts
-	 */
-	public void setUseEuropeanScripts(final boolean value)
-	{
-		setUseEuropeanScripts( getSession().getSessionContext(), value );
 	}
 	
 }

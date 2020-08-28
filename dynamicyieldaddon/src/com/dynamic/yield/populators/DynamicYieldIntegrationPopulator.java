@@ -18,8 +18,6 @@ public class DynamicYieldIntegrationPopulator implements Populator<DynamicYieldI
             target.setCdnLocation(source.getCdnLocation().getCode());
             target.setCdnLocationCustomURL(source.getCdnLocationCustomURL());
             target.setProductFeedUploadLocation(source.getProductFeedUploadLocation().getCode());
-            target.setProductFeedUploadLocationCustomURL(source.getProductFeedUploadLocationCustomURL());
-            target.setUseEuropeanScripts(source.isUseEuropeanScripts());
         }
     }
 }

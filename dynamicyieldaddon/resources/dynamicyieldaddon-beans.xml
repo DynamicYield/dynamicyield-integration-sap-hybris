@@ -16,8 +16,6 @@
 		<property name="cdnLocation" type="String"/>
 		<property name="cdnLocationCustomURL" type="String"/>
 		<property name="productFeedUploadLocation" type="String"/>
-		<property name="productFeedUploadLocationCustomURL" type="String"/>
-		<property name="useEuropeanScripts" type="boolean"/>
 	</bean>
 
 </beans>

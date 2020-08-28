@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 3 Aug 2020, 09:33:05                        ---
+ * --- Generated at 28 Aug 2020, 11:43:38                       ---
  * ----------------------------------------------------------------
  */
 package com.dynamic.yield.constants;
@@ -32,12 +32,13 @@ public class GeneratedDynamicyieldaddonConstants
 		public static class CDNLocationOptions
 		{
 			public static final String STANDARD = "STANDARD".intern();
+			public static final String EUROPE = "EUROPE".intern();
 			public static final String CUSTOM = "CUSTOM".intern();
 		}
 		public static class ProductFeedUploadLocationOptions
 		{
 			public static final String STANDARD = "STANDARD".intern();
-			public static final String CUSTOM = "CUSTOM".intern();
+			public static final String EUROPE = "EUROPE".intern();
 		}
 		public static class SyncRateOptions
 		{

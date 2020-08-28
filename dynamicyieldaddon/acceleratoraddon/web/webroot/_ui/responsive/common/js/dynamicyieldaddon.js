@@ -345,15 +345,29 @@ dynamicyieldaddon = {
         var facetCheckboxes = $('.js-product-facet .js-facet-checkbox');
         if (facetCheckboxes.length > 0) {
             $(facetCheckboxes).change(function () {
-                dynamicyieldaddon.triggerFilterItemsEvent($(this));
+                dynamicyieldaddon.triggerFilterItemsEvent($(this), null);
+            });
+        }
+        var facetLinks = $('.facet__text a[href]');
+        if (facetLinks.length > 0) {
+            $(facetLinks).click(function () {
+                dynamicyieldaddon.triggerFilterItemsEvent(null, $(this));
             });
         }
     },
 
-    triggerFilterItemsEvent: function (facetCheckbox) {
+    triggerFilterItemsEvent: function (facetCheckbox, facetLink) {
         var uniqueRequestId = dynamicyieldaddon.generateUniqueRequestId();
 
-        var facetElement = $(facetCheckbox).closest('.js-facet');
+        var facetValue = null;
+
+        if (facetCheckbox === null && facetLink !== null) {
+            facetValue = facetLink.text();
+            var facetElement = $(facetLink).closest('.js-facet');
+        } else {
+            var facetElement = $(facetCheckbox).closest('.js-facet');
+        }
+
         var facetIndex = $(facetElement).index();
         var filterType;
         if (facetIndex !== -1) {
@@ -362,9 +376,12 @@ dynamicyieldaddon = {
                 filterFlag = 1;
             }
             filterType = dynamicyieldfilteritems.event.facetCodes[facetIndex - filterFlag];
-            var fullFacetValue = $(facetCheckbox).parent().find('.facet__list__text').text();
-            var countFacetValue = $(facetCheckbox).parent().find('.facet__value__count').text();
-            var facetValue = fullFacetValue.replace(countFacetValue, '').trim();
+            if (facetValue === null) {
+                var fullFacetValue = $(facetCheckbox).parent().find('.facet__list__text').text();
+                var countFacetValue = $(facetCheckbox).parent().find('.facet__value__count').text();
+                facetValue = fullFacetValue.replace(countFacetValue, '').trim();
+            }
+
             var filterStringValue;
             var filterNumericValue;
             if (dynamicyieldaddon.isNumber(facetValue)) {

@@ -10,11 +10,12 @@
     <enumtypes>
         <enumtype code="CDNLocationOptions" dynamic="false">
             <value code="STANDARD" />
+            <value code="EUROPE" />
             <value code="CUSTOM" />
         </enumtype>
         <enumtype code="ProductFeedUploadLocationOptions" dynamic="false">
             <value code="STANDARD" />
-            <value code="CUSTOM" />
+            <value code="EUROPE" />
         </enumtype>
         <enumtype code="SyncRateOptions" dynamic="false">
             <value code="SIX_HOURS" />
@@ -60,25 +61,23 @@
                     <attribute qualifier="cdnLocation" type="CDNLocationOptions">
                         <description>CDN location option.</description>
                         <persistence type="property"/>
+                        <modifiers optional="false" />
                         <defaultvalue>em().getEnumerationValue("CDNLocationOptions", "STANDARD")</defaultvalue>
                     </attribute>
                     <attribute qualifier="cdnLocationCustomURL" type="java.lang.String">
                         <description>CDN location custom URL.</description>
                         <persistence type="property"/>
+                        <defaultvalue>em().getEnumerationValue("CDNLocationOptions", "STANDARD")</defaultvalue>
                     </attribute>
                     <attribute qualifier="productFeedUploadLocation" type="ProductFeedUploadLocationOptions">
                         <description>Product feed upload location option.</description>
                         <persistence type="property"/>
+                        <modifiers optional="false" />
                         <defaultvalue>em().getEnumerationValue("ProductFeedUploadLocationOptions", "STANDARD")</defaultvalue>
                     </attribute>
                     <attribute qualifier="productFeedUploadLocationCustomURL" type="java.lang.String">
                         <description>Product feed upload location custom URL.</description>
                         <persistence type="property"/>
-                    </attribute>
-                    <attribute qualifier="useEuropeanScripts" type="boolean">
-                        <persistence type="property" />
-                        <modifiers optional="false" />
-                        <defaultvalue>Boolean.FALSE</defaultvalue>
                     </attribute>
                 </attributes>
                 <indexes>
