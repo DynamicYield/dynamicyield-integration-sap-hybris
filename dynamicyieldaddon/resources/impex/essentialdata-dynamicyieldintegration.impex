@@ -1,0 +1,36 @@
+UPDATE GenericItem[processor = de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor]; pk[unique = true]
+$productCatalog = $config-dynamic.yield.product.catalog
+$productCatalogVersion = $config-dynamic.yield.product.catalog.version
+$baseStore = $config-dynamic.yield.base.store
+$baseSite = $config-dynamic.yield.base.site
+
+INSERT_UPDATE ServicelayerJob; code[unique = true]           ; springId
+                             ; dynamicyieldexportproductfeed ; dynamicyieldexportproductfeed
+
+
+INSERT_UPDATE DynamicYieldExportProductFeedCronJob; code[unique = true]           ; job(code)                     ; sessionLanguage(isocode); productCatalog(catalog(id), version)   ; basestore(uid); baseSite(uid)
+                                                  ; dynamicyieldexportproductfeed ; dynamicyieldexportproductfeed ; en                      ; $productCatalog:$productCatalogVersion ; $baseStore    ; $baseSite
+
+INSERT_UPDATE Trigger; cronJob(code)[unique = true]  ; second; minute; hour [unique = true]; day; month; year; relative; active; maxAcceptableDelay
+                     ; dynamicyieldexportproductfeed ; 0     ; 0     ; 24                  ; -1 ; -1   ; -1  ; false   ; true  ; -1
+                     ; dynamicyieldexportproductfeed ; 0     ; 0     ; 12                  ; -1 ; -1   ; -1  ; true    ; false ; -1
+                     ; dynamicyieldexportproductfeed ; 0     ; 0     ; 6                   ; -1 ; -1   ; -1  ; true    ; false ; -1
+
+
+INSERT_UPDATE DynamicYieldExportProperty; exportCronJob(code)[unique = true]; dynamicYieldProperty[unique = true]; productProperty; beanValueProvider                         ; active; multilanguage; mandatory
+                                        ; dynamicyieldexportproductfeed     ; name                               ; name           ;                                           ; true  ; true         ; true
+                                        ; dynamicyieldexportproductfeed     ; url                                ; code           ; dynamicYieldExportUrlValueProvider        ; true  ; false        ; true
+                                        ; dynamicyieldexportproductfeed     ; sku                                ; code           ;                                           ; true  ; false        ; true
+                                        ; dynamicyieldexportproductfeed     ; group_id                           ; code           ; dynamicYieldExportGroupIdValueProvider    ; true  ; false        ; true
+                                        ; dynamicyieldexportproductfeed     ; price                              ; code           ; dynamicYieldExportPriceValueProvider      ; true  ; false        ; true
+                                        ; dynamicyieldexportproductfeed     ; in_stock                           ; code           ; dynamicYieldExportInStockValueProvider    ; true  ; false        ; true
+                                        ; dynamicyieldexportproductfeed     ; categories                         ; code           ; dynamicYieldExportCategoriesValueProvider ; true  ; true         ; true
+                                        ; dynamicyieldexportproductfeed     ; image_url                          ; code           ; dynamicYieldExportImageUrlValueProvider   ; true  ; false        ; true
+                                        ; dynamicyieldexportproductfeed     ; keywords                           ; code           ; dynamicYieldExportKeywordsValueProvider   ; true  ; true         ; false
+
+
+##CMS Site data - temporary
+INSERT_UPDATE CMSSite; uid[unique = true]; urlPatterns[mode = append]
+                     ; electronics       ; (?i)^https?://dy-electronics.portaltech-south.de(:[\d]+)?/dynamicyieldintegrationstorefront/electronics/.*$
+                     ; apparel-de        ; https://dy-apparel-de.portaltech-south.de/dynamicyieldintegrationstorefront/de
+
