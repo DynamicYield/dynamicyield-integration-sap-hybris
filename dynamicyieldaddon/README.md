@@ -19,7 +19,7 @@ Once a Dynamic Yield account has been created for a specified SAP Commerce platf
 
 - Dynamic Yield account.
 
-- Standard Spring MVC/JSP/JS hybris commerce application (Spartacus and Angular are not supported)
+- Standard Spring MVC/JSP/JS SAP Commerce application (Spartacus and Angular are not supported)
 
 ## Versioning
 
@@ -279,7 +279,7 @@ filterStringValue/filterNumericValue are taken from the element with the class  
 #### Change attribute
 This Event is fired every time the visitor changes a product attribute on the Product page (selects different attribute for Variant Product).
 
-In default hybris commerce accelerator, this occurs in two occasions:
+In default SAP Commerce accelerator, this occurs in two occasions:
 
 1. Customer clicks on the picture icon of different variant (for example - style). The event for this case is triggered when user clicks on LI element within DIV that has class variant-selector.
 
